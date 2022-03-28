@@ -36,11 +36,11 @@
         }
 
         .red {
-            background-color: darkred;
+            background-color: red;
         }
 
-        .blue {
-            background-color: lightblue;
+        .lightgreen {
+            background-color: lightgreen;
         }
 
         .green {
@@ -54,63 +54,43 @@
 </head>
 
 <body>
-    <div id="board" class="board">
-        <!-- <div class="square orange">90</div>
-        <div class="square">89</div>
-        <div class="square">88</div>
-        <div class="square red">87</div>
-        <div class="square">86</div>
-        <div class="square blue">85</div>
-        <div class="square">84</div>
-        <div class="square">83</div>
-        <div class="square blue">82</div>
-
-        <div class="square">73</div>
-        <div class="square red">74</div>
-        <div class="square">75</div>
-        <div class="square">76</div>
-        <div class="square">77</div>
-        <div class="square">78</div>
-        <div class="square blue">79</div>
-        <div class="square">80</div>
-        <div class="square">81</div>
-
-        <div class="square">72</div>
-        <div class="square">71</div>
-        <div class="square lightred">70</div>
-        <div class="square">69</div>
-        <div class="square green">68</div>
-        <div class="square">67</div>
-        <div class="square">66</div>
-        <div class="square green">65</div>
-        <div class="square red">64</div>            -->
-    </div>
+    <div id="board" class="board"></div>
     <script>
-        // let html = '';
-        // for(let i = 90; i > 0; i--){
-        //     html += /*html*/`<div class="square">${i}</div>`;
-        // }
-        document.getElementById('board').innerHTML =
-            createSquareHtml(90, 'orange')
-            + createSquareHtml(89)
-            + createSquareHtml(88)
-            + createSquareHtml(87, 'red')
-            + createSquareHtml(86)
-            + createSquareHtml(85, 'blue')
-            + createSquareHtml(84)
-            + createSquareHtml(83)
-            + createSquareHtml(82, 'blue')
-
-        function createSquareHtml(number, css) {
-            return `<div class="square ${css || ''}">${number}</div>`;
+        let ladders = [
+            { start: 1, end: 40 },
+            { start: 87, end: 70 },
+            { start: 68, end: 85 },
+        ];
+        let colors = [];
+        for (let ladder of ladders) {
+            let color = ladder.end > ladder.start ? 'green' : 'red';
+            colors[ladder.start] = color;
+            colors[ladder.end] = `light${color}`;
         }
-        // function createSquareHtml(number) {
-        //     return `<div class="square">${number}</div>`;
-        // }
 
-        // function createSquareWithCssHtml(number, css) {
-        //     return `<div class="square ${css}">${number}</div>`;
-        // }
+        document.getElementById('board').innerHTML = createBoardHtml();
+
+        function createBoardHtml() {
+            let html = '';
+            for (let i = 0; i < 5; i++) {
+                let startNumber = 90 - i * 18;
+                html += createRowHtml(startNumber, -1)
+                    + createRowHtml(startNumber - 17, 1);
+            }
+            return html;
+        }
+
+        function createRowHtml(startNumber, direction) {
+            let html = '';
+            for (let i = 0; i < 9; i++) {
+                html += createSquareHtml(startNumber + i * direction)
+            }
+            return html;
+        }
+
+        function createSquareHtml(number) {
+            return `<div class="square ${colors[number] || ''}">${number}</div>`;
+        }
     </script>
 </body>
 
