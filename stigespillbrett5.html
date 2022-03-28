@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+        1. Implementere ny funksjonalitet
+            - Gjøre det på enkleste måte, for å spare hodet/kreftene
+        2. Refactoring = gjøre koden bedre, uten å endre/legge til funksjonalitet
+        3. Gå til 1
+    -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: cornflowerblue;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            border: 2px solid black;
+            width: 90vmin;
+            height: 100vmin;
+        }
+
+        .square {
+            background-color: yellow;
+            border: 1px solid gray;
+            padding: 1vh;
+        }
+
+        .orange {
+            background-color: orange;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+        .lightgreen {
+            background-color: lightgreen;
+        }
+
+        .green {
+            background-color: green;
+        }
+
+        .lightred {
+            background-color: lightcoral;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="board" class="board"></div>
+    <script>
+        let ladders = [
+            { start: 1, end: 40 },
+            { start: 87, end: 70 },
+            { start: 68, end: 85 },
+        ];
+        let colors = [];
+        for (let ladder of ladders) {
+            let color = ladder.end > ladder.start ? 'green' : 'red';
+            colors[ladder.start] = color;
+            colors[ladder.end] = `light${color}`;
+        }
+
+        document.getElementById('board').innerHTML = createBoardHtml();
+
+        function createBoardHtml() {
+            let html = '';
+            for (let i = 0; i < 5; i++) {
+                let startNumber = 90 - i * 18;
+                html += createRowHtml(startNumber, -1)
+                    + createRowHtml(startNumber - 17, 1);
+            }
+            return html;
+        }
+
+        function createRowHtml(startNumber, direction) {
+            let html = '';
+            for (let i = 0; i < 9; i++) {
+                html += createSquareHtml(startNumber + i * direction)
+            }
+            return html;
+        }
+
+        function createSquareHtml(number) {
+            return `<div class="square ${colors[number] || ''}">${number}</div>`;
+        }
+    </script>
+</body>
+
+</html>

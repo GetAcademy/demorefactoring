@@ -86,16 +86,21 @@
         <div class="square red">64</div>            -->
     </div>
     <script>
-        document.getElementById('board').innerHTML =
-            createSquareHtml(90, 'orange')
-            + createSquareHtml(89)
-            + createSquareHtml(88)
-            + createSquareHtml(87, 'red')
-            + createSquareHtml(86)
-            + createSquareHtml(85, 'blue')
-            + createSquareHtml(84)
-            + createSquareHtml(83)
-            + createSquareHtml(82, 'blue')
+        let html = '';
+        for (let i = 0; i < 5; i++) {
+            let startNumber = 90 - i * 18;
+            html += createRowHtml(startNumber, -1)
+                + createRowHtml(startNumber - 17, 1);
+        }
+        document.getElementById('board').innerHTML = html;
+
+        function createRowHtml(startNumber, direction) {
+            let html = '';
+            for (let i = 0; i < 9; i++) {
+                html += createSquareHtml(startNumber + i * direction)
+            }
+            return html;
+        }
 
         function createSquareHtml(number, css) {
             return `<div class="square ${css || ''}">${number}</div>`;
