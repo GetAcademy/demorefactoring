@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+        1. Implementere ny funksjonalitet
+            - Gjøre det på enkleste måte, for å spare hodet/kreftene
+        2. Refactoring = gjøre koden bedre, uten å endre/legge til funksjonalitet
+        3. Gå til 1
+    -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: cornflowerblue;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            border: 2px solid black;
+            width: 90vmin;
+            height: 100vmin;
+        }
+
+        .square {
+            background-color: yellow;
+            border: 1px solid gray;
+            padding: 1vh;
+        }
+
+        .orange {
+            background-color: orange;
+        }
+
+        .red {
+            background-color: darkred;
+        }
+
+        .blue {
+            background-color: lightblue;
+        }
+
+        .green {
+            background-color: green;
+        }
+
+        .lightred {
+            background-color: lightcoral;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="board" class="board">
+        <!-- <div class="square orange">90</div>
+        <div class="square">89</div>
+        <div class="square">88</div>
+        <div class="square red">87</div>
+        <div class="square">86</div>
+        <div class="square blue">85</div>
+        <div class="square">84</div>
+        <div class="square">83</div>
+        <div class="square blue">82</div>
+
+        <div class="square">73</div>
+        <div class="square red">74</div>
+        <div class="square">75</div>
+        <div class="square">76</div>
+        <div class="square">77</div>
+        <div class="square">78</div>
+        <div class="square blue">79</div>
+        <div class="square">80</div>
+        <div class="square">81</div>
+
+        <div class="square">72</div>
+        <div class="square">71</div>
+        <div class="square lightred">70</div>
+        <div class="square">69</div>
+        <div class="square green">68</div>
+        <div class="square">67</div>
+        <div class="square">66</div>
+        <div class="square green">65</div>
+        <div class="square red">64</div>            -->
+    </div>
+    <script>
+        // let html = '';
+        // for(let i = 90; i > 0; i--){
+        //     html += /*html*/`<div class="square">${i}</div>`;
+        // }
+        document.getElementById('board').innerHTML =
+            createSquareHtml(90, 'orange')
+            + createSquareHtml(89)
+            + createSquareHtml(88)
+            + createSquareHtml(87, 'red')
+            + createSquareHtml(86)
+            + createSquareHtml(85, 'blue')
+            + createSquareHtml(84)
+            + createSquareHtml(83)
+            + createSquareHtml(82, 'blue')
+
+        function createSquareHtml(number, css) {
+            return `<div class="square ${css || ''}">${number}</div>`;
+        }
+        // function createSquareHtml(number) {
+        //     return `<div class="square">${number}</div>`;
+        // }
+
+        // function createSquareWithCssHtml(number, css) {
+        //     return `<div class="square ${css}">${number}</div>`;
+        // }
+    </script>
+</body>
+
+</html>
