@@ -73,7 +73,9 @@
         }
 
         function createRowHtml(startNumber, direction) {
-            return createIntArray(10).map(i=>createSquareHtml(startNumber + i * direction)).join('');
+            return createIntArray(10)
+                .map(i => createSquareHtml(startNumber + i * direction))
+                .join('');
         }
 
         function createSquareHtml(number) {
@@ -90,7 +92,7 @@
             return colors;
         }
 
-        function createIntArray(count){
+        function createIntArray(count) {
             return [...Array(count).keys()];
         }
     </script>
